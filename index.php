@@ -20,7 +20,7 @@ require_once __DIR__ . '/components/header.php';
                 </ul>
                 <div class="ms-auto text-end">
                     <button type="button" class="btn btn-outline-success me-2"><a href="./signin.php" style="text-decoration: none;">Login</a></button>
-                    <button type="button" class="btn btn-warning">Sign-up</button>
+                    <button type="button" class="btn btn-warning"><a href="./signup.php" style="text-decoration: none; color: black;">Sign-up</a></button>
                 </div>
             </div>
         </div>
