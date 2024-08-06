@@ -19,7 +19,6 @@ require_once __DIR__ . '/components/header.php';
                     <li class="nav-item"><a class="nav-link" href="#!">Contact</a></li>
                     <li class="nav-item"><a class="nav-link" aria-current="page" href="#">Blog</a></li>
                 </ul>
-<<<<<<< HEAD
                 <?php if (isSetAuthentication()) : ?>
                     <div class="ms-auto text-end">
                         <?php if ($isAdmin) : ?>
@@ -34,12 +33,10 @@ require_once __DIR__ . '/components/header.php';
                         <button type="button" class="btn btn-warning"><a href="views/authorization/signup.php" style="text-decoration: none; color: white;">Sign up</a></button>
                     </div>
                 <? endif; ?>
-=======
                 <div class="ms-auto text-end">
                     <button type="button" class="btn btn-outline-success me-2"><a href="./signin.php" style="text-decoration: none;">Login</a></button>
                     <button type="button" class="btn btn-warning"><a href="./signup.php" style="text-decoration: none; color: black;">Sign-up</a></button>
                 </div>
->>>>>>> 26385d1c10d674000a6e2c72dfc3f402de3b85e2
             </div>
         </div>
     </nav>
