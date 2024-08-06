@@ -1,15 +1,16 @@
 <?php
+
 require_once __DIR__ . '/src/function.php';
 
-checkGuest();
-
-require_once __DIR__ . '/components/header.php'; 
+$user = currentUser();
+$isAdmin = isAdmin();
+require_once __DIR__ . '/components/header.php';
 ?>
 
 <body>
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
         <div class="container">
-            <a class="navbar-brand" href="#!">Blog</a>
+            <a class="navbar-brand" href="/">Blog</a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button>
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
                 <ul class="navbar-nav mb-2 mb-lg-0">
@@ -18,10 +19,20 @@ require_once __DIR__ . '/components/header.php';
                     <li class="nav-item"><a class="nav-link" href="#!">Contact</a></li>
                     <li class="nav-item"><a class="nav-link" aria-current="page" href="#">Blog</a></li>
                 </ul>
-                <div class="ms-auto text-end">
-                    <button type="button" class="btn btn-outline-success me-2"><a href="./signin.php" style="text-decoration: none;">Login</a></button>
-                    <button type="button" class="btn btn-warning">Sign-up</button>
-                </div>
+                <?php if (isSetAuthentication()) : ?>
+                    <div class="ms-auto text-end">
+                        <?php if ($isAdmin) : ?>
+                            <button type="button" class="btn btn-danger me-2"><a href="views/admin/dashboard.php" style="text-decoration: none; color: white;">Панель управления</a></button>
+                        <? endif; ?>
+                        <button type="button" class="btn btn-outline-success me-2"><a href="#" style="text-decoration: none; color: green;"><?php echo $user['name'] ?></a></button>
+                        <button type="button" class="btn btn-warning"><a href="/actions/logout.php" style="text-decoration: none; color: white;">Logout</a></button>
+                    </div>
+                <? else : ?>
+                    <div class="ms-auto text-end">
+                        <button type="button" class="btn btn-outline-success me-2"><a href="views/authorization/signin.php" style="text-decoration: none; color: green;">Sign in</a></button>
+                        <button type="button" class="btn btn-warning"><a href="views/authorization/signup.php" style="text-decoration: none; color: white;">Sign up</a></button>
+                    </div>
+                <? endif; ?>
             </div>
         </div>
     </nav>
@@ -53,13 +64,17 @@ require_once __DIR__ . '/components/header.php';
             </nav>
         </div>
         <!-- Side widgets-->
-        <?php require_once __DIR__ . '/components/search.php' ?>
+        <?php
+        require_once __DIR__ . '/components/search.php'
+        ?>
         <!-- Categories widget-->
         <?php require_once __DIR__ . '/components/categories.php' ?>
         <!-- Side widget-->
         <div class="card mb-4">
             <div class="card-header">Side Widget</div>
-            <div class="card-body">You can put anything you want inside of these side widgets. They are easy to use, and feature the Bootstrap 5 card component!</div>
+            <div class="card-body">You can put anything you want inside of these side widgets. They are easy to use, and
+                feature the Bootstrap 5 card component!
+            </div>
         </div>
     </div>
     </div>

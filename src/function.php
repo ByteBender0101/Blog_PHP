@@ -11,6 +11,40 @@ function redirect(string $path)
 }
 
 
+function setValidationError(string $fieldName, string $message): void
+{
+    $_SESSION['validation'][$fieldName] = $message;
+}
+
+function hasValidationError(string $fieldName): bool
+{
+    return isset($_SESSION['validation'][$fieldName]);
+}
+
+function validationErrorAttr(string $fieldName): string
+{
+    return isset($_SESSION['validation'][$fieldName]) ? 'aria-invalid="true"' : '';
+}
+
+function validationErrorMessage(string $fieldName): string
+{
+    $message = $_SESSION['validation'][$fieldName] ?? '';
+    unset($_SESSION['validation'][$fieldName]);
+    return $message;
+}
+
+function setOldValue(string $key, mixed $value): void
+{
+    $_SESSION['old'][$key] = $value;
+}
+
+function old(string $key)
+{
+    $value = $_SESSION['old'][$key] ?? '';
+    unset($_SESSION['old'][$key]);
+    return $value;
+}
+
 function setMessage(string $key, string $message): void
 {
     $_SESSION['message'][$key] = $message;
@@ -27,61 +61,6 @@ function getMessage(string $key): string
     unset($_SESSION['message'][$key]);
     return $message;
 }
-
-
-function setValidateError(string $fieldName, string $message): void
-{
-    $_SESSION['validation'][$fieldName] = $message;
-}
-
-function hasValidationError(string $fieldName): bool
-{
-    return isset($_SESSION['validation'][$fieldName]);
-}
-
-function validationErrorAttr(string $fieldName): string
-{
-    return isset($_SESSION['validation'][$fieldName]) ? 'aria-invalid="true"' : '';
-}
-
-function getValidationError(string $fieldName): string
-{
-    $message = $_SESSION['validation'][$fieldName] ?? '';
-    unset($_SESSION['validation'][$fieldName]);
-    return $message;
-}
-
-
-function setOldValue(string $key, mixed $value): void
-{
-    $_SESSION['old'][$key] = $value;
-}
-
-function old(string $key)
-{
-    $value = $_SESSION['old'][$key] ?? '';
-    unset($_SESSION['old'][$key]);
-    return $value;
-}
-
-function uploadFile(array $file, string $prefix = ''): string
-{
-    $uploadPath = __DIR__ . '/../uploads';
-
-    if (!is_dir($uploadPath)) {
-        mkdir($uploadPath, 0777, true);
-    }
-
-    $ext = pathinfo($file['name'], PATHINFO_EXTENSION);
-    $fileName = $prefix . '_' . time() . ".$ext";
-
-    if (!move_uploaded_file($file['tmp_name'], "$uploadPath/$fileName")) {
-        die('Ошибка при загрузке файла на сервер');
-    }
-
-    return "uploads/$fileName";
-}
-
 
 function getPDO(): PDO
 {
@@ -123,16 +102,13 @@ function logout(): void
     redirect('/');
 }
 
-function checkAuth(): void
+function isSetAuthentication(): bool
 {
-    if (!isset($_SESSION['user']['id'])) {
-        redirect('/');
-    }
+    return isset($_SESSION['user']['id']);
 }
 
-function checkGuest(): void
+function isAdmin(): bool
 {
-    if (isset($_SESSION['user']['id'])) {
-        redirect('/');
-    }
+    $user = currentUser();
+    return $user && $user['role'] === 'admin';
 }
