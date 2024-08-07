@@ -112,3 +112,24 @@ function isAdmin(): bool
     $user = currentUser();
     return $user && $user['role'] === 'admin';
 }
+
+
+function getPosts(): array
+{
+    $pdo = getPDO();
+
+    $stmt = $pdo->query("SELECT * FROM posts ORDER BY created_at DESC");
+    return $stmt->fetchAll(PDO::FETCH_ASSOC);
+}
+
+function getPostById($postId)
+{
+    $pdo = getPDO();
+
+    $stmt = $pdo->prepare("SELECT * FROM posts WHERE id = :id");
+    $stmt->execute(['id' => $postId]);
+    return $stmt->fetch(PDO::FETCH_ASSOC);
+}
+
+
+
