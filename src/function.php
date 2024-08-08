@@ -145,21 +145,18 @@ function banUser($userId)
     try {
         $stmt = $pdo->prepare("UPDATE users SET banned = 1 WHERE id = ?");
         $stmt->execute([$userId]);
-        // Дополнительные действия, если необходимо
         return true;
     } catch (PDOException $e) {
         return false;
     }
 }
 
-// Функция для разбана пользователя
 function unbanUser($userId)
 {
     $pdo = getPDO();
     try {
         $stmt = $pdo->prepare("UPDATE users SET banned = 0 WHERE id = ?");
         $stmt->execute([$userId]);
-        // Дополнительные действия, если необходимо
         return true;
     } catch (PDOException $e) {
         return false;

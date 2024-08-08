@@ -5,7 +5,6 @@ $banReason = getBanReason();
 ?>
 
 <body>
-
     <?php if (isBanned()) : ?>
         <?php require_once __DIR__ . '/components/header_banned.php'; ?>
             <?php echo '
@@ -16,8 +15,7 @@ $banReason = getBanReason();
                     '; ?>
     <?php else : ?>
         <?php require_once __DIR__ . '/components/header.php'; ?>
-        <!-- Page header with logo and tagline-->
-        <header class="py-5 bg-light border-bottom mb-4">
+         <header class="py-5 bg-light border-bottom mb-4">
             <div class="container">
                 <div class="text-center my-5">
                     <h1 class="fw-bolder">Welcome to Blog Home!</h1>
@@ -25,7 +23,6 @@ $banReason = getBanReason();
                 </div>
             </div>
         </header>
-        <!-- Page content-->
         <div class="container">
             <div class="row">
                 <?php require_once __DIR__ . '/components/posts.php' ?>
@@ -61,10 +58,7 @@ $banReason = getBanReason();
         </div>
         </div>
         <?php require_once __DIR__ . '/components/footer.php' ?>
-
-        <!-- Bootstrap core JS-->
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
-        <!-- Core theme JS-->
         <script src="assets/js/scripts.js"></script>
     <?php endif; ?>
 </body>

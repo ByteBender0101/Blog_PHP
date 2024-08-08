@@ -29,7 +29,8 @@ $users = getUsers();
         </ul>
 
         <div class="tab-content" id="myTabContent">
-            <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
+            <div class="tab-pane fade show inactive" id="home" role="tabpanel" aria-labelledby="home-tab">
+                <h2 class="my-2">Список постов</h2>
                 <table class="table table-bordered my-3">
                     <thead>
                         <tr>
@@ -70,8 +71,8 @@ $users = getUsers();
                     Создать пост
                 </button>
             </div>
-            <div class="tab-pane fade" id="settings" role="tabpanel" aria-labelledby="settings-tab">
-                <h2>Список пользователей</h2>
+            <div class="tab-panel fade" id="settings" role="tabpanel" aria-labelledby="settings-tab">
+                <h2 class="my-2">Список пользователей</h2>
                 <table class="table table-bordered my-3">
                     <thead>
                         <tr>
