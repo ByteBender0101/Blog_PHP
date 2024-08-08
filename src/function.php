@@ -131,5 +131,49 @@ function getPostById($postId)
     return $stmt->fetch(PDO::FETCH_ASSOC);
 }
 
+function getUsers()
+{
+    $pdo = getPDO();
+    $stmt = $pdo->query("SELECT * FROM users");
+    return $stmt->fetchAll(PDO::FETCH_ASSOC);
+}
 
 
+function banUser($userId)
+{
+    $pdo = getPDO();
+    try {
+        $stmt = $pdo->prepare("UPDATE users SET banned = 1 WHERE id = ?");
+        $stmt->execute([$userId]);
+        // Дополнительные действия, если необходимо
+        return true;
+    } catch (PDOException $e) {
+        return false;
+    }
+}
+
+// Функция для разбана пользователя
+function unbanUser($userId)
+{
+    $pdo = getPDO();
+    try {
+        $stmt = $pdo->prepare("UPDATE users SET banned = 0 WHERE id = ?");
+        $stmt->execute([$userId]);
+        // Дополнительные действия, если необходимо
+        return true;
+    } catch (PDOException $e) {
+        return false;
+    }
+}
+
+function isBanned(): bool
+{
+    $user = currentUser();
+    return $user && $user['banned'] == 1;
+}
+
+function getBanReason(): ?string
+{
+    $user = currentUser();
+    return isset($user['ban_reason']) ? $user['ban_reason'] : null;
+}
