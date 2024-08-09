@@ -3,7 +3,7 @@ require_once __DIR__ . '/../../src/function.php';
 
 if ($_SERVER['REQUEST_METHOD'] === 'GET' && isset($_GET['id'])) {
     $postId = $_GET['id'];
-    $post = fetchPostById($postId);
+    $post = getPostById($postId);
 
     if (!$post) {
         $_SESSION['error'] = 'Post not found.';
@@ -28,15 +28,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'GET' && isset($_GET['id'])) {
     $_SESSION['error'] = 'Invalid request.';
     header('Location: /../../views/admin/dashboard.php');
     exit();
-}
-
-function fetchPostById($postId)
-{
-    $pdo = getPDO();
-
-    $stmt = $pdo->prepare("SELECT * FROM posts WHERE id = :id");
-    $stmt->execute(['id' => $postId]);
-    return $stmt->fetch(PDO::FETCH_ASSOC);
 }
 
 function updatePost($postId, $title, $content)

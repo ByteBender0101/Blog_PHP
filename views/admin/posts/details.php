@@ -1,18 +1,16 @@
 <?php
 require_once __DIR__ . '/../../../src/function.php';
-
 $users = getUsers();
 ?>
 <div class="container my-3">
     <?php
     echo "Привет, " . htmlspecialchars($user['name']) . "<br>" . "Это админка!" . "<br>";
     ?>
-    <a href='/' class="btn btn-danger">Назад</a>
 
     <div class="container my-3">
         <ul class="nav nav-tabs" id="myTab" role="tablist">
             <li class="nav-item" role="presentation">
-                <button class="nav-link" id="home-tab" data-bs-toggle="tab" data-bs-target="#home" type="button" role="tab" aria-controls="home">
+                <button class="nav-link active" id="home-tab" data-bs-toggle="tab" data-bs-target="#home" type="button" role="tab" aria-controls="home">
                     Посты
                 </button>
             </li>
@@ -29,7 +27,7 @@ $users = getUsers();
         </ul>
 
         <div class="tab-content" id="myTabContent">
-            <div class="tab-pane fade show inactive" id="home" role="tabpanel" aria-labelledby="home-tab">
+            <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
                 <h2 class="my-2">Список постов</h2>
                 <table class="table table-bordered my-3">
                     <thead>
@@ -53,9 +51,8 @@ $users = getUsers();
                                 <td><?php echo htmlspecialchars($post['created_at']); ?></td>
                                 <td>
                                     <div class="d-flex justify-content-center">
-                                        <button type="button" class="btn btn-primary btn-sm" data-bs-toggle="modal" data-bs-target="#exampleModal">
-                                            Изменить
-                                        </button>
+                                        <a href="../admin/posts/edit.php?id=<?php echo $post['id']; ?>" class="btn btn-primary btn-sm mx-1">Изменить</a>
+
                                         <form method="GET" action="/../../actions/crud_posts/delete_posts.php">
                                             <button type="submit" class="btn btn-danger btn-sm mx-1">Удалить</button>
                                         </form>
@@ -113,4 +110,4 @@ $users = getUsers();
         </div>
     </div>
 </div>
-</div>
+<?php require_once 'create.php'; ?>
