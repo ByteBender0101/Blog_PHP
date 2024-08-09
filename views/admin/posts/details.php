@@ -54,6 +54,7 @@ $users = getUsers();
                                         <a href="../admin/posts/edit.php?id=<?php echo $post['id']; ?>" class="btn btn-primary btn-sm mx-1">Изменить</a>
 
                                         <form method="GET" action="/../../actions/crud_posts/delete_posts.php">
+                                            <input type="hidden" name="id" value="<?php echo $post['id']; ?>">
                                             <button type="submit" class="btn btn-danger btn-sm mx-1">Удалить</button>
                                         </form>
                                     </div>
