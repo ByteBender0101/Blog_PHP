@@ -210,7 +210,7 @@ function getPosts(): array
 {
     $pdo = getPDO();
 
-    $stmt = $pdo->query("SELECT * FROM posts ORDER BY created_at DESC");
+    $stmt = $pdo->query("SELECT * FROM posts ORDER BY created_at ASC");
     return $stmt->fetchAll(PDO::FETCH_ASSOC);
 }
 
@@ -297,4 +297,48 @@ function getBanReason(): ?string
 {
     $user = currentUser();
     return isset($user['ban_reason']) ? $user['ban_reason'] : null;
+}
+
+function uploadFile(array $file, string $prefix = ''): string
+{
+    $uploadPath = __DIR__ . '/../views/user/uploads';
+
+    if (!is_dir($uploadPath)) {
+        mkdir($uploadPath, 0777, true);
+    }
+
+    $ext = pathinfo($file['name'], PATHINFO_EXTENSION);
+    $fileName = $prefix . '_' . time() . ".$ext";
+
+    if (!move_uploaded_file($file['tmp_name'], "$uploadPath/$fileName")) {
+        die('Ошибка при загрузке файла на сервер');
+    }
+
+    return "uploads/$fileName";
+}
+
+function getPostsPagination(int $page = 1, int $postsPerPage = 10): array
+{
+    // Получаем объект PDO
+    $pdo = getPDO();
+
+    // Рассчитываем OFFSET
+    $offset = ($page - 1) * $postsPerPage;
+
+    // Выполняем SQL-запрос с LIMIT и OFFSET для пагинации
+    $stmt = $pdo->prepare("SELECT * FROM posts ORDER BY created_at ASC LIMIT :limit OFFSET :offset");
+    $stmt->bindValue(':limit', $postsPerPage, PDO::PARAM_INT);
+    $stmt->bindValue(':offset', $offset, PDO::PARAM_INT);
+    $stmt->execute();
+
+    // Возвращаем массив записей
+    return $stmt->fetchAll(PDO::FETCH_ASSOC);
+}
+
+function getTotalPosts(): int
+{
+    $pdo = getPDO();
+
+    $stmt = $pdo->query("SELECT COUNT(*) FROM posts");
+    return (int)$stmt->fetchColumn();
 }

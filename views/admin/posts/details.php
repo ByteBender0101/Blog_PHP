@@ -15,13 +15,8 @@ $users = getUsers();
                 </button>
             </li>
             <li class="nav-item" role="presentation">
-                <button class="nav-link" id="profile-tab" data-bs-toggle="tab" data-bs-target="#profile" type="button" role="tab" aria-controls="profile">
-                    Профиль
-                </button>
-            </li>
-            <li class="nav-item" role="presentation">
                 <button class="nav-link" id="settings-tab" data-bs-toggle="tab" data-bs-target="#settings" type="button" role="tab" aria-controls="settings">
-                    Настройки
+                    Пользователи
                 </button>
             </li>
         </ul>

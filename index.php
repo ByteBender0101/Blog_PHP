@@ -2,12 +2,13 @@
 require_once __DIR__ . '/src/function.php';
 $user = currentUser();
 $banReason = getBanReason();
+
 ?>
 
 <body>
     <?php if (isBanned()) : ?>
         <?php require_once __DIR__ . '/components/header_banned.php'; ?>
-            <?php echo '
+        <?php echo '
                     <div class="container my-3 alert alert-warning alert-dismissible fade show" role="alert">
                         <strong>Ваш аккаунт заблокирован.</strong> Пожалуйста, свяжитесь с администратором.
                         <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
@@ -15,7 +16,7 @@ $banReason = getBanReason();
                     '; ?>
     <?php else : ?>
         <?php require_once __DIR__ . '/components/header.php'; ?>
-         <header class="py-5 bg-light border-bottom mb-4">
+        <header class="py-5 bg-light border-bottom mb-4">
             <div class="container">
                 <div class="text-center my-5">
                     <h1 class="fw-bolder">Welcome to Blog Home!</h1>
@@ -25,35 +26,19 @@ $banReason = getBanReason();
         </header>
         <div class="container">
             <div class="row">
+            
+                <!-- Posts -->
                 <?php require_once __DIR__ . '/components/posts.php' ?>
-                <!-- Pagination-->
-                <nav aria-label="Pagination">
-                    <hr class="my-0" />
-                    <ul class="pagination justify-content-center my-4">
-                        <li class="page-item disabled"><a class="page-link" href="#" tabindex="-1"
-                                aria-disabled="true">Newer</a></li>
-                        <li class="page-item active" aria-current="page"><a class="page-link" href="#!">1</a></li>
-                        <li class="page-item"><a class="page-link" href="#!">2</a></li>
-                        <li class="page-item"><a class="page-link" href="#!">3</a></li>
-                        <li class="page-item disabled"><a class="page-link" href="#!">...</a></li>
-                        <li class="page-item"><a class="page-link" href="#!">15</a></li>
-                        <li class="page-item"><a class="page-link" href="#!">Older</a></li>
-                    </ul>
-                </nav>
+
+                <!-- Search -->
+                <?php
+                require_once __DIR__ . '/components/search.php'
+                ?>
+
+                <!-- Categories widget-->
+                <?php require_once __DIR__ . '/components/categories.php' ?>
             </div>
-            <!-- Side widgets-->
-            <?php
-            require_once __DIR__ . '/components/search.php'
-            ?>
-            <!-- Categories widget-->
-            <?php require_once __DIR__ . '/components/categories.php' ?>
-            <!-- Side widget-->
-            <div class="card mb-4">
-                <div class="card-header">Side Widget</div>
-                <div class="card-body">You can put anything you want inside of these side widgets. They are easy to use, and
-                    feature the Bootstrap 5 card component!
-                </div>
-            </div>
+            <?php require_once __DIR__ . '/components/pagination.php' ?>
         </div>
         </div>
         </div>

@@ -1,5 +1,5 @@
 <div class="card mb-4">
-    <div class="card-header">Categories</div>
+    <div class="card-header">Категории</div>
     <div class="card-body">
         <div class="row">
             <div class="col-sm-6">

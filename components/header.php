@@ -30,7 +30,7 @@ $isAdmin = isAdmin();
                     <?php if ($isAdmin) : ?>
                         <button type="button" class="btn btn-danger me-2"><a href="/views/admin/dashboard.php" style="text-decoration: none; color: white;">Панель управления</a></button>
                     <? endif; ?>
-                    <button type="button" class="btn btn-outline-success me-2"><a href="#" style="text-decoration: none; color: green;"><?php echo $user['name'] ?></a></button>
+                    <button type="button" class="btn btn-outline-success me-2"><a href="/views/user/profile.php" style="text-decoration: none; color: white;"><?php echo $user['name'] ?></a></button>
                     <button type="button" class="btn btn-warning"><a href="/actions/logout.php" style="text-decoration: none; color: white;">Logout</a></button>
                 </div>
             <? else : ?>
