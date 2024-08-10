@@ -13,9 +13,6 @@ $user = currentUser();
     <title>User Profile</title>
     <!-- Bootstrap CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/css/bootstrap.min.css" rel="stylesheet">
-    <style>
-        /* Custom styles if needed */
-    </style>
 </head>
 
 <body>
@@ -25,7 +22,7 @@ $user = currentUser();
             <div class="col-md-4">
                 <!-- Profile picture -->
                 <div class="text-center">
-                    <img src="<?php echo $user['avatar']?>" class="rounded-circle img-thumbnail" style="width: 250px; height: 250px" alt="Avatar">
+                    <img src="../../<?php echo $user['avatar']?>" class="rounded-circle img-thumbnail" style="width: 250px; height: 250px" alt="Avatar">
                 </div>
                 <form action="/actions/uploadImageAvatar.php" method="POST" enctype="multipart/form-data">
                     <input type="file" class="form-control form-control-sm my-3" name="avatar" id="avatar" />
@@ -44,10 +41,6 @@ $user = currentUser();
             </div>
         </div>
     </div>
-
-    <!-- Bootstrap JS and dependencies (optional if you need JS features) -->
-    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/js/bootstrap.min.js"></script>
 </body>
 
 </html>

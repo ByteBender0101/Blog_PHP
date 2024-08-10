@@ -1,8 +1,5 @@
 <?php
-
 require_once __DIR__ . '/../src/function.php';
-$user = currentUser();
-$isAdmin = isAdmin();
 ?>
 <!DOCTYPE html>
 <html lang="en">

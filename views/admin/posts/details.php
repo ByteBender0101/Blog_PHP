@@ -3,10 +3,6 @@ require_once __DIR__ . '/../../../src/function.php';
 $users = getUsers();
 ?>
 <div class="container my-3">
-    <?php
-    echo "Привет, " . htmlspecialchars($user['name']) . "<br>" . "Это админка!" . "<br>";
-    ?>
-
     <div class="container my-3">
         <ul class="nav nav-tabs" id="myTab" role="tablist">
             <li class="nav-item" role="presentation">
