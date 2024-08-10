@@ -26,7 +26,7 @@ $banReason = getBanReason();
         </header>
         <div class="container">
             <div class="row">
-            
+
                 <!-- Posts -->
                 <?php require_once __DIR__ . '/components/posts.php' ?>
 
@@ -45,6 +45,59 @@ $banReason = getBanReason();
         <?php require_once __DIR__ . '/components/footer.php' ?>
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
         <script src="assets/js/scripts.js"></script>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
+        <script>
+            $(document).ready(function() {
+                var $result = $('#search_box-result');
+
+                $('#search').on('keyup', function() {
+                    var search = $(this).val();
+                    if ((search != '') && (search.length > 1)) {
+                        $.ajax({
+                            type: "POST",
+                            url: "/actions/search.php",
+                            data: {
+                                'search': search
+                            },
+                            success: function(msg) {
+                                $result.html(msg);
+                                if (msg != '') {
+                                    $result.fadeIn();
+                                } else {
+                                    $result.fadeOut(100);
+                                }
+                            }
+                        });
+                    } else {
+                        $result.html('');
+                        $result.fadeOut(100);
+                    }
+                });
+
+                $(document).on('click', function(e) {
+                    if (!$(e.target).closest('.input-group').length) {
+                        $result.html('');
+                        $result.fadeOut(100);
+                    }
+                });
+
+                $(document).on('click', '.search_result-name a', function() {
+                    $('#search').val($(this).text());
+                    $result.fadeOut(100);
+                    return false;
+                });
+
+                $(document).on('click', function(e) {
+                    if (!$(e.target).closest('.input-group').length) {
+                        $result.html('');
+                        $result.fadeOut(100);
+                    }
+                });
+
+            });
+        </script>
+
     <?php endif; ?>
 </body>
 

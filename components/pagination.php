@@ -23,7 +23,7 @@ $formattedDate = date("F j, Y");
         <!-- Ссылка "Newer" -->
         <li class="page-item <?= ($page <= 1) ? 'disabled' : '' ?>">
             <a class="page-link" href="<?= ($page > 1) ? '?page=' . ($page - 1) : '#' ?>" tabindex="-1" aria-disabled="<?= ($page <= 1) ? 'true' : 'false' ?>">
-                Newer
+                Назад
             </a>
         </li>
 
@@ -39,7 +39,7 @@ $formattedDate = date("F j, Y");
         <!-- Ссылка "Older" -->
         <li class="page-item <?= ($page >= $totalPages) ? 'disabled' : '' ?>">
             <a class="page-link" href="<?= ($page < $totalPages) ? '?page=' . ($page + 1) : '#' ?>">
-                Older
+                Далее
             </a>
         </li>
     </ul>

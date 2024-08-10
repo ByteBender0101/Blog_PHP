@@ -42,7 +42,7 @@ $users = getUsers();
                             <tr>
                                 <th scope="row"><?php echo htmlspecialchars($post['id']); ?></th>
                                 <td><?php echo htmlspecialchars($post['title']); ?></td>
-                                <td><?php echo htmlspecialchars($post['content']); ?></td>
+                                <td><?php echo mb_substr(htmlspecialchars($post['content']), 0, 50) . '...'; ?></td>
                                 <td><?php echo htmlspecialchars($post['created_at']); ?></td>
                                 <td>
                                     <div class="d-flex justify-content-center">

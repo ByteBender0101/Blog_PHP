@@ -27,7 +27,7 @@ $formattedDate = date("F j, Y");
                         <div class="card-body">
                             <div class="small text-muted"><?php echo $formattedDate ?></div>
                             <h2 class="card-title h4"><?php echo htmlspecialchars($post['title']) ?></h2>
-                            <p class="card-text"><?php echo htmlspecialchars($post['content']) ?></p>
+                            <p class="card-text"><?php echo mb_substr(htmlspecialchars($post['content']), 0, 150) . '...';?></p>
                             <a class="btn btn-primary" href="/views/post/article.php?id=<?php echo $post['id']; ?>">Read more →</a>
                         </div>
                     </div>
